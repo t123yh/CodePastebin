@@ -1,0 +1,23 @@
+@page
+@using CodePastebin.Data
+@model ViewCodeModel
+@{
+    ViewData["Title"] = "代码剪贴板";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Code.Poster - @ViewBag.Code.PostTime <a asp-page-handler="Download" asp-route-id="@ViewBag.Code.Id">下载</a></h3>
+        
+    </div>
+    <div class="panel-body">
+        <pre><code class = "@(ViewBag.Code.Language)">@ViewBag.Code.Content</code></pre>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+}

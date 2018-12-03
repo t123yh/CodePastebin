@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "代码剪贴板";
+}
+
+<div>
+    <p>目前共有 @ViewBag.Count 条代码</p>
+    <form method="post">
+        <div class="form-group">
+            <label for="posterInput">发送者</label>
+            <input type="text" name="poster" id="posterInput" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="codeTypeSelector">代码类型</label>
+            <select name="codeType" id="codeTypeSelector" class="form-control">
+                <option value="plaintext">纯文本</option>
+                <option value="cpp" selected>C / C++</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="codeTypeSelector">代码内容</label>
+            <textarea name="content" class="form-control" rows="10"></textarea>
+        </div>
+        <button type="submit" class="form-control btn btn-primary">提交</button>
+    </form>
+</div>
