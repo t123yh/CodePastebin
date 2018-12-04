@@ -1,15 +1,40 @@
 @page
-@using CodePastebin.Data
+@using Microsoft.AspNetCore.Http.Extensions
 @model ViewCodeModel
 @{
-    ViewData["Title"] = "代码剪贴板";
+    ViewData["Title"] = "查看代码";
 }
+
+<h2><a href="/">发布代码</a></h2>
 
 <div class="panel panel-success">
     <div class="panel-heading">
-        <h3 class="panel-title">@ViewBag.Code.Poster - @ViewBag.Code.PostTime <a asp-page-handler="Download" asp-route-id="@ViewBag.Code.Id">下载</a></h3>
-        
+        <h3 class="panel-title">代码详情</h3>
     </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <b>发布者</b> @ViewBag.Code.Poster</li>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+            <b>发布时间</b> @ViewBag.Code.PostTime.ToString("yyyy/MM/dd HH:mm:ss")</li>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+            <b>代码长度</b> @ViewBag.Code.Content.Length</li>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <b>本页链接</b> <a href="@Request.GetEncodedUrl()">@Request.GetDisplayUrl()</a>
+            <a id="copyButton" data-clipboard-text="@Request.GetEncodedUrl()" data-toggle="tooltip" data-placement="top" data-title="已经复制" data-trigger="manual">
+                <span class="glyphicon glyphicon-copy"></span>
+            </a>
+        </li>
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+            <a id="downloadButton" asp-page-handler="Download" asp-route-id="@ViewBag.Code.Id">
+                <b>下载代码</b>
+            </a>
+        </li>
+    </ul>
     <div class="panel-body">
         <pre><code class = "@(ViewBag.Code.Language)">@ViewBag.Code.Content</code></pre>
     </div>
@@ -17,7 +42,21 @@
 
 @section Scripts
 {
+    <script src="/lib/clipboardjs/clipboard.min.js"></script>
+    <script src="~/lib/highlightjs/highlight.min.js"></script>
     <script>
-        hljs.initHighlightingOnLoad();
+        $(function() {
+            window.hljs.initHighlightingOnLoad();
+            const copyButtonObj = window.$("#copyButton");
+            const clipboard = new window.ClipboardJS(copyButtonObj.get(0));
+            copyButtonObj.tooltip();
+            clipboard.on('success',
+                function(e) {
+                    copyButtonObj.tooltip("show");
+                    setTimeout(function() {
+                        copyButtonObj.tooltip("hide");
+                    }, 2000);
+                });
+        });
     </script>
 }

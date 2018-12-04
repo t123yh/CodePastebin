@@ -1,27 +1,49 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "代码剪贴板";
+    ViewData["Title"] = "首页";
 }
 
-<div>
-    <p>目前共有 @ViewBag.Count 条代码</p>
-    <form method="post">
-        <div class="form-group">
+<h1>代码剪贴板</h1>
+
+<form method="post">
+    <div class="row">
+        <div class="form-group col-md-6">
             <label for="posterInput">发送者</label>
             <input type="text" name="poster" id="posterInput" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="codeTypeSelector">代码类型</label>
             <select name="codeType" id="codeTypeSelector" class="form-control">
                 <option value="plaintext">纯文本</option>
-                <option value="cpp" selected>C / C++</option>
+                <option value="cpp" selected>C / C++ (自动排版)</option>
             </select>
         </div>
-        <div class="form-group">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
             <label for="codeTypeSelector">代码内容</label>
             <textarea name="content" class="form-control" rows="10"></textarea>
         </div>
-        <button type="submit" class="form-control btn btn-primary">提交</button>
-    </form>
-</div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="form-control btn btn-primary">提交</button>
+        </div>
+    </div>
+</form>
+
+<p></p>
+<p>目前共有 @ViewBag.Count 条代码</p>
+<p>
+    制作：走软小组
+</p>
+<p>
+    成员：
+    <ul>
+        <li>18373444 田韵豪</li>
+        <li>18373xxx 祖旭波</li>
+        <li>18373xxx 王振</li>
+        <li>18373146 张书恺</li>
+    </ul>
+</p>
