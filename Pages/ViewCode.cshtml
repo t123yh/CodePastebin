@@ -45,8 +45,8 @@
     <script src="~/lib/clipboardjs/clipboard.min.js"></script>
     <script src="~/lib/highlightjs/highlight.min.js"></script>
     <script>
+        hljs.initHighlightingOnLoad();
         $(function() {
-            window.hljs.initHighlightingOnLoad();
             const copyButtonObj = window.$("#copyButton");
             const clipboard = new window.ClipboardJS(copyButtonObj.get(0));
             copyButtonObj.tooltip();
