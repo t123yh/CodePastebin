@@ -35,11 +35,11 @@
             </a>
         </li>
     </ul>
-    <div class="panel-body">
-        <pre><code class = "@(ViewBag.Code.Language)">@ViewBag.Code.Content</code></pre>
-    </div>
 </div>
 
+<div class="code-area">
+    <pre><code class = "@(ViewBag.Code.Language)">@ViewBag.Code.Content</code></pre>
+</div>
 @section Scripts
 {
     <script src="~/lib/clipboardjs/clipboard.min.js"></script>
