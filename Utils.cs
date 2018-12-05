@@ -35,8 +35,8 @@ namespace CodePastebin
     {
         public static async Task<string> Run(string orig)
         {
-            ProcessStartInfo proc = new ProcessStartInfo("clang-format", "-assume-filename=1.cpp -style=file");
-            Console.WriteLine(Environment.CurrentDirectory);
+            ProcessStartInfo proc = new ProcessStartInfo("clang-format", 
+                "-assume-filename=1.cpp -style=file");
             proc.WorkingDirectory = Environment.CurrentDirectory;
             proc.RedirectStandardInput = true;
             proc.RedirectStandardOutput = true;
