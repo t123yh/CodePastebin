@@ -44,8 +44,11 @@
 {
     <script src="~/lib/clipboardjs/clipboard.min.js"></script>
     <script src="~/lib/highlightjs/highlight.min.js"></script>
+    <script src="~/lib/highlightjs/highlightjs-line-numbers.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
+        hljs.initLineNumbersOnLoad();
+
         $(function() {
             const copyButtonObj = window.$("#copyButton");
             const clipboard = new window.ClipboardJS(copyButtonObj.get(0));
