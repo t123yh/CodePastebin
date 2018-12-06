@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CodePastebin
 {
@@ -28,6 +29,21 @@ namespace CodePastebin
                 cancellationToken.Register(tcs.SetCanceled);
 
             return tcs.Task;
+        }
+
+        private const string WeChatUserAgent = "(iPhone; CPU iPhone OS 7_0_2 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) CriOS/";
+        
+        public static bool CheckIfWeChat(HttpContext context)
+        {
+            if (context.Request.Headers.TryGetValue("User-Agent", out var ua))
+            {
+                if (ua.Contains(WeChatUserAgent))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 

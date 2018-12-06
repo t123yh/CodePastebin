@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using CodePastebin.Data;
 using Microsoft.AspNetCore.Builder;
@@ -52,6 +53,22 @@ namespace CodePastebin
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+            app.Use(async (context, next) =>
+            {
+                if (Utils.CheckIfWeChat(context))
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.OK;
+                    context.Response.ContentType = "text/html; charset=utf-8";
+
+                    await context.Response.WriteAsync("<h1>请勿使用微信转码访问本页</h1>" +
+                                                      "<p><b>请重新打开超链接，在提示“将要访问”时请点击右下角的“访问原网页”，不要点击“继续访问”。</b></p>");
+                }
+                else
+                {
+                    await next.Invoke();
+                }
+            });
+            
             app.UseStaticFiles();
 
             app.UseMvc();
