@@ -31,13 +31,13 @@ namespace CodePastebin
             return tcs.Task;
         }
 
-        private const string WeChatUserAgent = "(iPhone; CPU iPhone OS 7_0_2 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) CriOS/";
+        private const string WeChatUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_2 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) CriOS/";
         
         public static bool CheckIfWeChat(HttpContext context)
         {
             if (context.Request.Headers.TryGetValue("User-Agent", out var ua))
             {
-                if (ua.Contains(WeChatUserAgent))
+                if (ua.Any(x => x.Contains(WeChatUserAgent)))
                 {
                     return true;
                 }
