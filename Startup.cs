@@ -60,8 +60,13 @@ namespace CodePastebin
                     context.Response.StatusCode = (int)HttpStatusCode.OK;
                     context.Response.ContentType = "text/html; charset=utf-8";
 
-                    await context.Response.WriteAsync("<h1>请勿使用微信转码访问本页</h1>" +
-                                                      "<p><b>请重新打开超链接，在提示“将要访问”时请点击右下角的“访问原网页”，不要点击“继续访问”。</b></p>");
+                    const string forbiddenString = "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'></head>" +
+                                                   "<body>" +
+                                                   "<h1>请勿使用微信转码访问本页</h1>" +
+                                                   "<p><b>请重新打开超链接，在提示“将要访问”时请点击右下角的“访问原网页”，不要点击“继续访问”。</b></p>" +
+                                                   "</body>";
+
+                    await context.Response.WriteAsync(forbiddenString);
                 }
                 else
                 {
